@@ -17,14 +17,9 @@ public class ULimaValidador {
     // La funcionalidad de esta clase debe ser independiente de la central
     // de riesgo utilizada.
     public boolean esSujetoCredito(Alumno alumno, String tipoCentral){
-        CentralRiesgoAdapter cra ;
-        if (tipoCentral.equals("cer")){
-            cra = new CertiflexAdapter();
-        }else if (tipoCentral.equals("equi")){
-            cra = new EquitelAdapter();
-        }else{
-            return false;
-        }
+        CentralRiesgoFactory factory = new CentralRiesgoFactory();
+        CentralRiesgoAdapter cra = factory.obtenerAdapter(tipoCentral);
+        
         return cra.validarEstadoCrediticio(alumno.getDni());
     }
 }
